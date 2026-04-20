@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>System Breach...</title>
+
+<style>
+body {
+  background: black;
+  color: #00ff00;
+  font-family: monospace;
+  padding: 20px;
+  overflow: hidden;
+}
+
+#terminal {
+  white-space: pre-line;
+  font-size: 18px;
+}
+
+input {
+  background: black;
+  color: #00ff00;
+  border: 1px solid #00ff00;
+  font-family: monospace;
+  padding: 5px;
+}
+
+button {
+  background: black;
+  color: #00ff00;
+  border: 1px solid #00ff00;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.glitch {
+  color: red;
+  font-size: 30px;
+  animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(1px, -1px); }
+  25% { transform: translate(-1px, 1px); }
+  50% { transform: translate(2px, 0); }
+  75% { transform: translate(-2px, 0); }
+  100% { transform: translate(1px, 1px); }
+}
+
+#photo {
+  width: 200px;
+  margin-top: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="terminal"></div>
+
+<div id="passwordBox" class="hidden">
+  <p>Enter Password to Continue:</p>
+  <input type="password" id="pass">
+  <button onclick="checkPass()">ENTER</button>
+</div>
+
+<div id="giftBox" class="hidden">
+  <button onclick="openGift()">🎁 Open Gift</button>
+</div>
+
+<img id="photo" class="hidden" src="https://via.placeholder.com/200">
+
+<audio id="scream">
+  <source src="https://www.myinstants.com/media/sounds/movie_1.mp3">
+</audio>
+
+<audio id="bgmusic" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-creepy.mp3">
+</audio>
+
+<script>
+const terminal = document.getElementById("terminal");
+
+const lines = [
+"Initializing system...",
+"Scanning device...",
+"Bypassing firewall...",
+"Accessing personal data...",
+"Decrypting secrets...",
+"",
+"⚠ WARNING ⚠",
+"Unauthorized Access Detected",
+"",
+"Injecting payload...",
+"Executing exploit...",
+"",
+"ACCESS GRANTED ✅"
+];
+
+let i = 0;
+
+function typeLine() {
+  if (i < lines.length) {
+    terminal.innerHTML += lines[i] + "\\n";
+    i++;
+    setTimeout(typeLine, 500);
+  } else {
+    showPassword();
+  }
+}
+
+typeLine();
+
+function showPassword() {
+  terminal.innerHTML += "\\n\\n> Enter password to proceed...\\n";
+  document.getElementById("passwordBox").classList.remove("hidden");
+}
+
+function checkPass() {
+  const val = document.getElementById("pass").value;
+
+  if (val.toLowerCase() === "ayush") {
+    document.getElementById("passwordBox").classList.add("hidden");
+    hackReveal();
+  } else {
+    alert("ACCESS DENIED ❌");
+  }
+}
+
+function hackReveal() {
+  document.getElementById("bgmusic").play();
+
+  setTimeout(() => {
+    terminal.innerHTML += "\\n\\n💀 SYSTEM OVERRIDE 💀\\n";
+  }, 500);
+
+  setTimeout(() => {
+    document.getElementById("scream").play();
+    terminal.innerHTML += "\\n\\nYOU HAVE BEEN HACKED!!!\\n";
+  }, 1500);
+
+  setTimeout(() => {
+    terminal.innerHTML += "\\n\\n...Just kidding 😄\\n";
+    terminal.innerHTML += "\\n🎉 HAPPY BIRTHDAY AYUSH 🎉\\n";
+  }, 3000);
+
+  setTimeout(showBattery, 4000);
+}
+
+function showBattery() {
+  if (navigator.getBattery) {
+    navigator.getBattery().then(function(battery) {
+      let percent = Math.floor(battery.level * 100);
+      terminal.innerHTML += "\\n🔋 Battery: " + percent + "%";
+      showGift();
+    });
+  } else {
+    terminal.innerHTML += "\\n🔋 Battery info not supported";
+    showGift();
+  }
+}
+
+function showGift() {
+  setTimeout(() => {
+    terminal.innerHTML += "\\n\\n🎁 Gift Unlocked!";
+    document.getElementById("giftBox").classList.remove("hidden");
+  }, 1000);
+}
+
+function openGift() {
+  document.getElementById("photo").classList.remove("hidden");
+  terminal.innerHTML += "\\n\\n❤️ Have an amazing day, Ayush!";
+  terminal.innerHTML += "\\n> END OF TRANSMISSION <span class='blink'>|</span>";
+}
+</script>
+
+</body>
+</html>
