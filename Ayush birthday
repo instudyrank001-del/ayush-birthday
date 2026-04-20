@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>System Hack...</title>
+
+<style>
+body {
+  background: black;
+  color: #00ff00;
+  font-family: monospace;
+  padding: 20px;
+}
+
+#terminal {
+  white-space: pre-line;
+  font-size: 18px;
+}
+
+.hidden { display: none; }
+
+button, input {
+  background: black;
+  color: #00ff00;
+  border: 1px solid #00ff00;
+  padding: 8px;
+  font-family: monospace;
+  margin-top: 10px;
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+img {
+  width: 220px;
+  margin-top: 20px;
+  border: 2px solid #00ff00;
+}
+</style>
+</head>
+
+<body>
+
+<div id="terminal"></div>
+
+<div id="passwordBox" class="hidden">
+  <p>> ENTER PASSWORD:</p>
+  <input type="password" id="pass">
+  <br>
+  <button onclick="checkPass()">ACCESS</button>
+</div>
+
+<div id="giftBox" class="hidden">
+  <button onclick="openGift()">🎁 OPEN GIFT</button>
+</div>
+
+<img id="photo" class="hidden" src="https://drive.google.com/uc?export=view&id=17ca4SAppEDoz6B6__J3SLLbLvG67gFXf">">
+
+<audio id="scream">
+  <source src="https://www.myinstants.com/media/sounds/movie_1.mp3">
+</audio>
+
+<script>
+const terminal = document.getElementById("terminal");
+
+const lines = [
+"Booting system...",
+"Scanning device...",
+"Bypassing security...",
+"Accessing private data...",
+"Decrypting files...",
+"",
+"⚠ WARNING ⚠",
+"Unauthorized access detected...",
+"",
+"Injecting script...",
+"Executing...",
+"",
+"ACCESS GRANTED ✅"
+];
+
+let i = 0;
+
+function typeLine() {
+  if (i < lines.length) {
+    terminal.innerHTML += lines[i] + "\\n";
+    i++;
+    setTimeout(typeLine, 500);
+  } else {
+    showPassword();
+  }
+}
+
+typeLine();
+
+function showPassword() {
+  terminal.innerHTML += "\\n> Enter password to continue...\\n";
+  document.getElementById("passwordBox").classList.remove("hidden");
+}
+
+function checkPass() {
+  let val = document.getElementById("pass").value;
+
+  if (val.toLowerCase() === "ayush") {
+    document.getElementById("passwordBox").classList.add("hidden");
+    startHack();
+  } else {
+    alert("ACCESS DENIED ❌");
+  }
+}
+
+function startHack() {
+  terminal.innerHTML += "\\n\\n💀 SYSTEM OVERRIDE 💀\\n";
+
+  setTimeout(() => {
+    document.getElementById("scream").play();
+    terminal.innerHTML += "\\nYOU HAVE BEEN HACKED!!!\\n";
+  }, 1000);
+
+  setTimeout(() => {
+    terminal.innerHTML += "\\n\\n😄 Just kidding!";
+    terminal.innerHTML += "\\n🎉 HAPPY BIRTHDAY AYUSH 🎉";
+  }, 2500);
+
+  setTimeout(showBattery, 3500);
+}
+
+function showBattery() {
+  if (navigator.getBattery) {
+    navigator.getBattery().then(function(battery) {
+      let percent = Math.floor(battery.level * 100);
+      terminal.innerHTML += "\\n\\n🔋 Battery: " + percent + "%";
+      showGift();
+    });
+  } else {
+    terminal.innerHTML += "\\n\\n🔋 Battery not supported";
+    showGift();
+  }
+}
+
+function showGift() {
+  setTimeout(() => {
+    terminal.innerHTML += "\\n\\n🎁 Gift unlocked!";
+    document.getElementById("giftBox").classList.remove("hidden");
+  }, 1000);
+}
+
+function openGift() {
+  document.getElementById("photo").classList.remove("hidden");
+  terminal.innerHTML += "\\n\\n❤️ Have an amazing day, Ayush!";
+  terminal.innerHTML += "\\n> END <span class='blink'>|</span>";
+}
+</script>
+
+</body>
+</html>
